@@ -4,6 +4,7 @@ import java.util.List;
 
 import codechicken.lib.render.SpriteSheetManager;
 import codechicken.lib.render.SpriteSheetManager.SpriteSheet;
+import codechicken.enderstorage.EnderStorage;
 import codechicken.enderstorage.api.EnderStorageManager;
 import codechicken.enderstorage.common.EnderStorageRecipe;
 import cpw.mods.fml.relauncher.Side;
@@ -41,7 +42,7 @@ public class ItemEnderPouch extends Item
     	if(stack.hasTagCompound() && !stack.getTagCompound().getString("owner").equals("global"))
             list.add(stack.getTagCompound().getString("owner"));
     	
-    	list.add(EnderStorageManager.getUnlocalizedColorDesc(stack));	     	       
+    	if(EnderStorage.enableColorblindMode) list.add(EnderStorageManager.getUnlocalizedColorDesc(stack));	     	       
         
     }
   

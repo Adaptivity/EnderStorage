@@ -39,6 +39,7 @@ public class EnderStorage
     public static Item personalItem;
     public static boolean disableVanillaEnderChest;
     public static boolean removeVanillaRecipe;
+    public static boolean enableColorblindMode;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -52,7 +53,8 @@ public class EnderStorage
         loadPersonalItem();
         disableVanillaEnderChest = config.getTag("disable-vanilla").setComment("Set to true to make the vanilla enderchest unplaceable.").getBooleanValue(true);
         removeVanillaRecipe = config.getTag("disable-vanilla_recipe").setComment("Set to true to make the vanilla enderchest uncraftable.").getBooleanValue(false);
-
+        enableColorblindMode = config.getTag("enable-colorblind-mode").setComment("Set to true to enable Colorblind Mode for Tooltips.").getBooleanValue(false);
+        
         EnderStorageManager.loadConfig(config);
         EnderStorageManager.registerPlugin(new EnderItemStoragePlugin());
         EnderStorageManager.registerPlugin(new EnderLiquidStoragePlugin());
