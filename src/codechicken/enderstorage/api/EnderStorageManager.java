@@ -13,13 +13,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import codechicken.enderstorage.common.EnderStorageRecipe;
 import codechicken.lib.config.ConfigFile;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.world.WorldEvent.Load;
 import net.minecraftforge.event.world.WorldEvent.Save;
@@ -175,6 +178,18 @@ public class EnderStorageManager
         return ((colours[0] & 0xF) << 8) + ((colours[1] & 0xF) << 4) + (colours[2] & 0xF);
     }
 
+    public static String getUnlocalizedColorDesc(ItemStack stack)
+    {
+    	int rgbFreq[] = EnderStorageManager.getColoursFromFreq(stack.getItemDamage());
+    	String rgbColour[] = new String[3];
+    	for (int i=0;i<3;i++)
+    	{
+    		rgbColour[i] = EnderStorageRecipe.oreDictionaryNames[Math.abs(rgbFreq[i]-15)].substring(3);
+    	}
+    	String desc = StatCollector.translateToLocal("enderstorage.colours."+rgbColour[0].toString()) + " - " + StatCollector.translateToLocal("enderstorage.colours." + rgbColour[1].toString()) + " - " + StatCollector.translateToLocal("enderstorage.colours." + rgbColour[2].toString()); 
+    	return desc;
+    }
+    
     public static int getColourFromFreq(int freq, int colour) {
         switch (colour) {
             case 0:

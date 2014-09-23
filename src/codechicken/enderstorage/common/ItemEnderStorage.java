@@ -2,6 +2,7 @@ package codechicken.enderstorage.common;
 
 import java.util.List;
 
+import codechicken.enderstorage.api.EnderStorageManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -46,7 +47,9 @@ public class ItemEnderStorage extends ItemBlock
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean extended)
     {
-        if(stack.hasTagCompound() && !stack.getTagCompound().getString("owner").equals("global"))
+    	list.subList(1, list.size()).clear();
+    	if(stack.hasTagCompound() && !stack.getTagCompound().getString("owner").equals("global"))
             list.add(stack.getTagCompound().getString("owner"));
+    	list.add(EnderStorageManager.getUnlocalizedColorDesc(stack));
     }
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import codechicken.lib.render.SpriteSheetManager;
 import codechicken.lib.render.SpriteSheetManager.SpriteSheet;
 import codechicken.enderstorage.api.EnderStorageManager;
+import codechicken.enderstorage.common.EnderStorageRecipe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
 
 public class ItemEnderPouch extends Item
@@ -34,9 +35,18 @@ public class ItemEnderPouch extends Item
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean extended)
     {
-        if(stack.hasTagCompound() && !stack.getTagCompound().getString("owner").equals("global"))
+     
+    	list.subList(1, list.size()).clear();
+    	
+    	if(stack.hasTagCompound() && !stack.getTagCompound().getString("owner").equals("global"))
             list.add(stack.getTagCompound().getString("owner"));
+    	
+    	list.add(EnderStorageManager.getUnlocalizedColorDesc(stack));	     	       
+        
     }
+  
+    	
+
     
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
@@ -52,6 +62,9 @@ public class ItemEnderPouch extends Item
             if(!stack.hasTagCompound())
                 stack.setTagCompound(new NBTTagCompound());
             stack.getTagCompound().setString("owner", chest.owner);
+            
+            addInformation(stack, player, stack.getTooltip(player, true), true);
+            
             return true;
         }
         return false;
