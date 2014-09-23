@@ -8,11 +8,16 @@ Credits: Ecu - original idea, design,
         chest and pouch texture
     Rosethorns - tank model
     Soaryn - tank texture
+	
+Supporters: Blkdragon112
 
-Supporters: Blkdragon112",
+Note: This version by mallrat208. Please report issues @
+      https://github.com/mallrat208/EnderStorage/issues
+
+",
   "version": "${version}",
   "mcversion": "${mc_version}",
-  "url": "http://www.minecraftforum.net/topic/909223",
+  "url": "",
   "authorList": [ "ChickenBones" ],
   "dependencies": [ "CodeChickenCore" ]
 }

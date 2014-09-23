@@ -178,16 +178,15 @@ public class EnderStorageManager
         return ((colours[0] & 0xF) << 8) + ((colours[1] & 0xF) << 4) + (colours[2] & 0xF);
     }
 
-    public static String getUnlocalizedColorDesc(ItemStack stack)
-    {
+    public static String getLocalizedColorDesc(ItemStack stack)
+    { 	
     	int rgbFreq[] = EnderStorageManager.getColoursFromFreq(stack.getItemDamage());
     	String rgbColour[] = new String[3];
     	for (int i=0;i<3;i++)
-    	{
-    		rgbColour[i] = EnderStorageRecipe.oreDictionaryNames[Math.abs(rgbFreq[i]-15)].substring(3);
-    	}
-    	String desc = StatCollector.translateToLocal("enderstorage.colours."+rgbColour[0].toString()) + " - " + StatCollector.translateToLocal("enderstorage.colours." + rgbColour[1].toString()) + " - " + StatCollector.translateToLocal("enderstorage.colours." + rgbColour[2].toString()); 
-    	return desc;
+    		{
+    			rgbColour[i] = StatCollector.translateToLocal("enderstorage.colours." + EnderStorageRecipe.oreDictionaryNames[Math.abs(rgbFreq[i]-15)].substring(3));
+    		}
+    	return rgbColour[0] + "/" + rgbColour[1] + "/" + rgbColour[2]; 
     }
     
     public static int getColourFromFreq(int freq, int colour) {

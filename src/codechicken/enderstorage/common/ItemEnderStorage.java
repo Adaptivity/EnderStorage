@@ -51,6 +51,6 @@ public class ItemEnderStorage extends ItemBlock
     	list.subList(1, list.size()).clear();
     	if(stack.hasTagCompound() && !stack.getTagCompound().getString("owner").equals("global"))
             list.add(stack.getTagCompound().getString("owner"));
-    	if(EnderStorage.enableColorblindMode) list.add(EnderStorageManager.getUnlocalizedColorDesc(stack));
+    	if(EnderStorage.enableColorblindMode) list.add(EnderStorageManager.getLocalizedColorDesc(stack));
     }
 }
